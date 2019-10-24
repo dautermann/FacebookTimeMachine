@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25E3096523617C9300984C51 /* nobel-prize-laureates.json in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD9A423617000006B0C5B /* nobel-prize-laureates.json */; };
 		25FAD98523616C0C006B0C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD98423616C0C006B0C5B /* AppDelegate.swift */; };
 		25FAD98723616C0C006B0C5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD98623616C0C006B0C5B /* ViewController.swift */; };
 		25FAD98A23616C0C006B0C5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD98823616C0C006B0C5B /* Main.storyboard */; };
 		25FAD98C23616C10006B0C5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD98B23616C10006B0C5B /* Assets.xcassets */; };
 		25FAD98F23616C10006B0C5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD98D23616C10006B0C5B /* LaunchScreen.storyboard */; };
 		25FAD99A23616C11006B0C5B /* FacebookTimeMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD99923616C11006B0C5B /* FacebookTimeMachineTests.swift */; };
+		25FAD9A6236170CA006B0C5B /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD9A5236170CA006B0C5B /* DataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		25FAD99523616C10006B0C5B /* FacebookTimeMachineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookTimeMachineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25FAD99923616C11006B0C5B /* FacebookTimeMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookTimeMachineTests.swift; sourceTree = "<group>"; };
 		25FAD99B23616C11006B0C5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25FAD9A423617000006B0C5B /* nobel-prize-laureates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "nobel-prize-laureates.json"; sourceTree = "<group>"; };
+		25FAD9A5236170CA006B0C5B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +83,12 @@
 			children = (
 				25FAD98423616C0C006B0C5B /* AppDelegate.swift */,
 				25FAD98623616C0C006B0C5B /* ViewController.swift */,
+				25FAD9A5236170CA006B0C5B /* DataSource.swift */,
 				25FAD98823616C0C006B0C5B /* Main.storyboard */,
 				25FAD98B23616C10006B0C5B /* Assets.xcassets */,
 				25FAD98D23616C10006B0C5B /* LaunchScreen.storyboard */,
 				25FAD99023616C10006B0C5B /* Info.plist */,
+				25FAD9A423617000006B0C5B /* nobel-prize-laureates.json */,
 			);
 			path = FacebookTimeMachine;
 			sourceTree = "<group>";
@@ -180,6 +186,7 @@
 				25FAD98F23616C10006B0C5B /* LaunchScreen.storyboard in Resources */,
 				25FAD98C23616C10006B0C5B /* Assets.xcassets in Resources */,
 				25FAD98A23616C0C006B0C5B /* Main.storyboard in Resources */,
+				25E3096523617C9300984C51 /* nobel-prize-laureates.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25FAD98723616C0C006B0C5B /* ViewController.swift in Sources */,
+				25FAD9A6236170CA006B0C5B /* DataSource.swift in Sources */,
 				25FAD98523616C0C006B0C5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
