@@ -12,11 +12,12 @@ class LaureatesNearbyViewController: UIViewController {
     let dataSource = DataSource()
 
     var year: Int?
-    var location: Location?
+    var location: LocationWithCoordinates?
     let cellId = "LaureateCell"
     var contextualResults = [PrizeWinner]()
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var currentPositionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +26,12 @@ class LaureatesNearbyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let currentTimeMachineYear = year, let currentTimeMachineLocation = location {
- //           contextualResults = dataSource.prizeWinners.map({(winner) -> PrizeWinner in
- //               let updatedWinner = winner.createCopyWithCostFor(thisYear: currentTimeMachineYear, andDistanceFrom: currentTimeMachineLocation)
- //               return updatedWinner
- //           })
-            contextualResults = dataSource.prizeWinners.map { $0.createCopyWithCostFor(thisYear: currentTimeMachineYear, andDistanceFrom: currentTimeMachineLocation) }
+            currentPositionLabel.text = "current location & year:\n\(currentTimeMachineLocation.name) \(currentTimeMachineYear)"
+
+            // calculate cost for all Nobel prize winners based on our current time machine year & location
+            contextualResults = dataSource.prizeWinners.map { $0.createCopyWithCostFor(thisYear: currentTimeMachineYear, andDistanceFrom: currentTimeMachineLocation.location) }
             // create list of 20 nobel laureates closest (in cost) to current year and current location
             contextualResults = Array(contextualResults.sorted(by: { $0.cost! < $1.cost! }).prefix(20))
-
             // and then reload data
             tableView.reloadData()
         }

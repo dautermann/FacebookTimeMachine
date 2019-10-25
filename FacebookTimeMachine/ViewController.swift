@@ -44,9 +44,9 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "StartTimeMachine" {
             if let nextViewController = segue.destination as? LaureatesNearbyViewController {
-                guard let coordinate = sender as? CLLocationCoordinate2D else { return }
+                guard let selectedLocation = sender as? LocationWithCoordinates else { return }
                 nextViewController.year = pickerDataSource.yearArray[yearPickerView.selectedRow(inComponent: 0)]
-                nextViewController.location = Location(lat: coordinate.latitude, lng: coordinate.longitude)
+                nextViewController.location = selectedLocation
             }
         }
     }
@@ -79,12 +79,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // convert this location name into lat and longitude and jump to next screen
         if let address = self.searchSource?[indexPath.row]  {
-            DataSource.getCoordinateFrom(address: address) { coordinate, error in
-                guard let coordinate = coordinate, error == nil else { return }
+            DataSource.getCoordinateFrom(address: address) { coordinates, error in
+                guard let coordinates = coordinates, error == nil else { return }
+                let location = LocationWithCoordinates(name: address, coordinates: coordinates)
                 // don't forget to update the UI from the main thread
                 DispatchQueue.main.async {
-                    print(address, "Location:", coordinate)
-                    self.performSegue(withIdentifier: "StartTimeMachine", sender: coordinate)
+                    print(address, "Location:", coordinates)
+                    self.performSegue(withIdentifier: "StartTimeMachine", sender: location)
                 }
             }
         }

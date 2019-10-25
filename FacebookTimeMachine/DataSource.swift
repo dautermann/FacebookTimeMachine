@@ -33,7 +33,8 @@ struct PrizeWinner: Codable {
         let distance = coord1.distance(from: coord2)
 
         // print("the distance between the two points is: \(distance) meters")
-        return distance
+        // distance in km's
+        return (distance / 1000)
     }
 
     func calculateCostFor(thisYear: Int, andDistanceFrom: Location) -> Int {
@@ -63,6 +64,16 @@ enum Gender: String, Codable {
 // MARK: - Location
 struct Location: Codable {
     let lat, lng: Double
+}
+
+struct LocationWithCoordinates {
+    let name: String
+    let coordinates: CLLocationCoordinate2D
+    
+    // FIXME: see if we can get rid of Location ... or make this thing totally codable
+    var location: Location {
+        return Location(lat: coordinates.latitude, lng: coordinates.longitude)
+    }
 }
 
 typealias PrizeWinnerArray = [PrizeWinner]
