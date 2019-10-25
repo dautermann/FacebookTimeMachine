@@ -10,9 +10,25 @@ import Foundation
 import CoreLocation
 import UIKit
 
-// I generated this beautiful Decodable thing via https://app.quicktype.io/#l=swift
+// FuelTank is a singleton, since we share it between two view controllers
+// https://developer.apple.com/documentation/swift/cocoa_design_patterns/managing_a_shared_resource_using_a_singleton
+public class FuelTank {
+    static let shared: FuelTank = FuelTank()
+    
+    private var startingLevel: Int = 0
+    private(set) var currentLevel: Int = 0
 
-import Foundation
+    func refillTankWith(liters: Int) {
+        startingLevel = liters
+        currentLevel = liters
+    }
+    
+    func deductCost(liters: Int) {
+        currentLevel -= liters
+    }
+}
+
+// I generated this beautiful Decodable thing via https://app.quicktype.io/#l=swift
 
 // MARK: - PrizeWinner
 struct PrizeWinner: Codable {
@@ -117,7 +133,7 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         return String(yearArray[row])
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        Swift.print("picked row \(row)")
-    }
+ //   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+ //       Swift.print("picked row \(row)")
+ //   }
 }

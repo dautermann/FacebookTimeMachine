@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var yearPickerView: UIPickerView!
+    @IBOutlet weak var startingFuelTankLevelField: UITextField!
 
     let pickerDataSource = PickerDataSource()
     let cellId = "cellId"
@@ -39,14 +40,17 @@ class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         yearPickerView.dataSource = pickerDataSource
         yearPickerView.delegate = pickerDataSource
+        yearPickerView.selectRow(pickerDataSource.yearArray.count - 2, inComponent:0, animated:true)
+
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "StartTimeMachine" {
-            if let nextViewController = segue.destination as? LaureatesNearbyViewController {
+            if let nextViewController = segue.destination as? LaureatesNearbyViewController, let startingFuelTankLevel = startingFuelTankLevelField.text {
+                FuelTank.shared.refillTankWith(liters: Int(startingFuelTankLevel) ?? 0)
                 guard let selectedLocation = sender as? LocationWithCoordinates else { return }
-                nextViewController.year = pickerDataSource.yearArray[yearPickerView.selectedRow(inComponent: 0)]
-                nextViewController.location = selectedLocation
+                nextViewController.initialYear = pickerDataSource.yearArray[yearPickerView.selectedRow(inComponent: 0)]
+                nextViewController.initialPosition = selectedLocation
             }
         }
     }
