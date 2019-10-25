@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 // I generated this beautiful Decodable thing via https://app.quicktype.io/#l=swift
 
@@ -24,6 +25,7 @@ struct PrizeWinner: Codable {
     let country: String
     let gender: Gender
     let name: String
+    var cost: Int?
 
     func distanceFrom(coordinate: Location) -> Double {
         let coord1 = CLLocation(latitude: location.lat, longitude: location.lng)
@@ -38,6 +40,11 @@ struct PrizeWinner: Codable {
         let nobelYear = Int(year) ?? 0
         let cost = (abs(thisYear - nobelYear) * 10) + Int(distanceFrom(coordinate: andDistanceFrom))
         return cost
+    }
+
+    func createCopyWithCostFor(thisYear: Int, andDistanceFrom: Location) -> PrizeWinner {
+        let cost = calculateCostFor(thisYear: thisYear, andDistanceFrom: andDistanceFrom)
+        return(PrizeWinner(id: id, category: category, died: died, diedcity: diedcity, borncity: borncity, born: born, surname: surname, firstname: firstname, motivation: motivation, location: location, city: city, borncountry: borncountry, year: year, diedcountry: diedcountry, country: country, gender: gender, name: name, cost: cost))
     }
 }
 
@@ -61,14 +68,15 @@ struct Location: Codable {
 typealias PrizeWinnerArray = [PrizeWinner]
 
 class DataSource {
+    var prizeWinners = PrizeWinnerArray()
+
     init() {
         if let path = Bundle.main.path(forResource: "nobel-prize-laureates", ofType: "json")
         {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 do {
-                    let prizeWinners : [PrizeWinner] = try JSONDecoder().decode(PrizeWinnerArray.self, from: jsonData)
-                    Swift.print("number of prizeWinners is \(prizeWinners.count)")
+                    prizeWinners = try JSONDecoder().decode(PrizeWinnerArray.self, from: jsonData)
                 } catch let error as NSError {
                     debugPrint("Error: \(error.description)")
                 }
@@ -76,5 +84,29 @@ class DataSource {
                 debugPrint("Data couldn't be read from \(path) - \(error)")
             }
         }
+    }
+
+    class func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
+        CLGeocoder().geocodeAddressString(address) { completion($0?.first?.location?.coordinate, $1) }
+    }
+}
+
+class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
+    let yearArray = Array(1900...2020)
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return yearArray.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(yearArray[row])
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        Swift.print("picked row \(row)")
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		25E3096523617C9300984C51 /* nobel-prize-laureates.json in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD9A423617000006B0C5B /* nobel-prize-laureates.json */; };
+		25E309712362D69000984C51 /* LaureateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E309702362D69000984C51 /* LaureateListingViewController.swift */; };
 		25FAD98523616C0C006B0C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD98423616C0C006B0C5B /* AppDelegate.swift */; };
 		25FAD98723616C0C006B0C5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD98623616C0C006B0C5B /* ViewController.swift */; };
 		25FAD98A23616C0C006B0C5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD98823616C0C006B0C5B /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25E309702362D69000984C51 /* LaureateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaureateListingViewController.swift; sourceTree = "<group>"; };
 		25FAD98123616C0C006B0C5B /* FacebookTimeMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookTimeMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25FAD98423616C0C006B0C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25FAD98623616C0C006B0C5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				25FAD98423616C0C006B0C5B /* AppDelegate.swift */,
 				25FAD98623616C0C006B0C5B /* ViewController.swift */,
+				25E309702362D69000984C51 /* LaureateListingViewController.swift */,
 				25FAD9A5236170CA006B0C5B /* DataSource.swift */,
 				25FAD98823616C0C006B0C5B /* Main.storyboard */,
 				25FAD98B23616C10006B0C5B /* Assets.xcassets */,
@@ -206,6 +209,7 @@
 			files = (
 				25FAD98723616C0C006B0C5B /* ViewController.swift in Sources */,
 				25FAD9A6236170CA006B0C5B /* DataSource.swift in Sources */,
+				25E309712362D69000984C51 /* LaureateListingViewController.swift in Sources */,
 				25FAD98523616C0C006B0C5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
