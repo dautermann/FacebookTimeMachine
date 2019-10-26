@@ -2,11 +2,15 @@
 Use a time machine to meet Nobel laureates!
 
 ## Getting started
-Type in coordinates (e.g. 37.3318, -122.0312) and you'll see a city appear in the table. Click on the city name and start traveling!
+Type in coordinates (e.g. 37.3318, -122.0312) and you'll see a city name appear or update in the table. Click on the city name and start traveling!
 
 You can also type in a place name and it'll auto complete and populate the initial city table.  Any places that appear do have coordinates associated with them.  To do proper city name autocomplete, I would have to bring in G00gle API's which I wasn't in the mood to do.
 
 As you travel through time, watch your fuel level drop.  Don't run out of gas!
+
+## Bonus
+1. You can type in a place name and if iOS knows about it, it'll autocomplete and fill out the table (and there will be coordinates associated with it).
+2. We keep track of fuel (to deduct the cost as we move along).
 
 ## Time analysis
 I recompute the cost to get to all 400+ Nobel winners from the time machine's current position each time the time machine jumps (and the table view... errr... dashboard updates).  So the time complexity is N entries, or linear.

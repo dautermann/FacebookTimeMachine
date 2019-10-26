@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import UIKit
 
-// FuelTank is a singleton, since we share it between two view controllers
+// FuelTank is a singleton, since we'll share it between at least two view controllers
 // https://developer.apple.com/documentation/swift/cocoa_design_patterns/managing_a_shared_resource_using_a_singleton
 public class FuelTank {
     static let shared: FuelTank = FuelTank()
@@ -83,6 +83,8 @@ enum Gender: String, Codable {
 }
 
 // MARK: - Location
+// CLLocationCoordinate2D isn't Codeable or Hashable... since Apple might eventually do this,
+// we'll create our own Codable type
 struct Location: Codable {
     let lat, lng: Double
 }
@@ -90,8 +92,8 @@ struct Location: Codable {
 struct LocationWithCoordinates {
     let name: String
     let coordinates: CLLocationCoordinate2D
-    
-    // FIXME: see if we can get rid of Location ... or make this thing totally codable
+
+    // get our app-native location struct from CLLocationCoordinate2D
     var location: Location {
         return Location(lat: coordinates.latitude, lng: coordinates.longitude)
     }
@@ -137,8 +139,4 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return String(yearArray[row])
     }
-
- //   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
- //       Swift.print("picked row \(row)")
- //   }
 }
