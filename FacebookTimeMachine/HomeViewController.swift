@@ -10,22 +10,20 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class ViewController: UIViewController {
-
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var yearPickerView: UIPickerView!
-    @IBOutlet weak var startingFuelTankLevelField: UITextField!
+class HomeViewController: UIViewController {
+    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var yearPickerView: UIPickerView!
+    @IBOutlet var startingFuelTankLevelField: UITextField!
 
     let pickerDataSource = PickerDataSource()
-    let cellId = "cellId"
     let coordinateCharacterSet: CharacterSet = {
         var newCharacterSet = CharacterSet.decimalDigits
         newCharacterSet.insert(charactersIn: " -.,")
         return newCharacterSet
     }()
 
-    //create a city name completion routine
+    // create a city name completion routine
     lazy var searchCompleter: MKLocalSearchCompleter = {
         let sc = MKLocalSearchCompleter()
         sc.filterType = .locationsOnly
@@ -37,11 +35,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
         yearPickerView.dataSource = pickerDataSource
         yearPickerView.delegate = pickerDataSource
         yearPickerView.selectRow(pickerDataSource.yearArray.count - 2, inComponent:0, animated:true)
-
+        // separators should go edge to edge
+        tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorInset = UIEdgeInsets.zero
+        // hide separators between empty cells
+        tableView.tableFooterView = UIView()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,7 +58,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //change searchCompleter depends on searchBar's text
         if !searchText.isEmpty {
@@ -69,13 +71,13 @@ extension ViewController: UISearchBarDelegate {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchSource?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Default", for: indexPath)
         cell.textLabel?.text = self.searchSource?[indexPath.row]
         return cell
     }
@@ -88,7 +90,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 let location = LocationWithCoordinates(name: address, coordinates: coordinates)
                 // don't forget to update the UI from the main thread
                 DispatchQueue.main.async {
-                    print(address, "Location:", coordinates)
                     self.performSegue(withIdentifier: "StartTimeMachine", sender: location)
                 }
             }
@@ -96,7 +97,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ViewController: MKLocalSearchCompleterDelegate {
+extension HomeViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         self.searchSource = completer.results.map { $0.title }
         DispatchQueue.main.async {
@@ -109,7 +110,7 @@ extension ViewController: MKLocalSearchCompleterDelegate {
     }
 }
 
-extension ViewController {
+extension HomeViewController {
     func onlyCoordinateDigits(_ candidateString: String) -> Bool {
         return coordinateCharacterSet.isSuperset(of: CharacterSet(charactersIn: candidateString))
     }
@@ -117,9 +118,11 @@ extension ViewController {
     func getCityNameFor(_ latLngString: String) {
         // allow separating lat & long by either a comma or a space
         var latLngStringsArray = latLngString.components(separatedBy: ",")
+
         if (latLngStringsArray.count == 0) {
             latLngStringsArray = latLngString.components(separatedBy: " ")
         }
+
         if latLngStringsArray.count == 2 {
             if let lat = Double(latLngStringsArray[0].trimmingCharacters(in: .whitespacesAndNewlines)), let lng = Double(latLngStringsArray[1].trimmingCharacters(in: .whitespacesAndNewlines)) {
                 let location = CLLocation(latitude: lat, longitude: lng)

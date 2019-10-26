@@ -23,8 +23,13 @@ public class FuelTank {
         currentLevel = liters
     }
     
-    func deductCost(liters: Int) {
+    func deductCost(liters: Int) -> Bool {
+        if liters > currentLevel {
+            // we are out of dilithium / gas / fuel pellets / soylent green
+            return false
+        }
         currentLevel -= liters
+        return true
     }
 }
 

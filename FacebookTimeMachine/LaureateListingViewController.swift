@@ -20,35 +20,56 @@ class LaureatesNearbyViewController: UIViewController {
     var initialYear: Int?
     var initialPosition: LocationWithCoordinates?
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var currentPositionLabel: UILabel!
-    @IBOutlet weak var currentYearLabel: UILabel!
-    @IBOutlet weak var currentFuelLevelLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var currentPositionLabel: UILabel!
+    @IBOutlet var currentYearLabel: UILabel!
+    @IBOutlet var currentFuelLevelLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if let year = initialYear, let location = initialPosition {
             leapTo(newLocation: location, in: year, with: 0)
         }
+        // go full screen because we can never return to
+        // where we start without a cost, yes?
+        modalPresentationStyle = .fullScreen
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NobelDetails" {
+            if let button = sender as? UIButton {
+                let buttonPosition = button.convert(button.bounds.origin, to: tableView)
+                if let indexPath = tableView.indexPathForRow(at: buttonPosition), let nextViewController = segue.destination as? NobelDetailsViewController {
+                    nextViewController.nobelWinner = contextualResults[indexPath.row]
+                }
+            }
+        }
     }
-    
+
     func leapTo(newLocation: LocationWithCoordinates, in newYear: Int, with cost: Int) {
-        currentPositionLabel.text = "location: \(newLocation.name)"
-        currentYearLabel.text = "year: \(newYear)"
-        FuelTank.shared.deductCost(liters: cost)
-        currentFuelLevelLabel.text = "fuel level: \(FuelTank.shared.currentLevel)"
+        if FuelTank.shared.deductCost(liters: cost) == true {
+            currentPositionLabel.text = "location: \(newLocation.name)"
+            currentYearLabel.text = "year: \(newYear)"
+            currentFuelLevelLabel.text = "fuel level: \(FuelTank.shared.currentLevel)"
 
-        // calculate cost for all Nobel prize winners based on our current time machine year & location
-        contextualResults = dataSource.prizeWinners.map { $0.createCopyWithCostFor(thisYear: newYear, andDistanceFrom: newLocation.location) }
-        // create list of 20 nobel laureates closest (in cost) to current year and current location
-        contextualResults = Array(contextualResults.sorted(by: { $0.cost! < $1.cost! }).prefix(20))
-        // and then reload data
-        tableView.reloadData()
-        tableView.setContentOffset(.zero, animated: true)
+            // calculate cost for all Nobel prize winners based on our current time machine year & location
+            contextualResults = dataSource.prizeWinners.map { $0.createCopyWithCostFor(thisYear: newYear, andDistanceFrom: newLocation.location) }
+            // create list of 20 nobel laureates closest (in cost) to current year and current location
+            contextualResults = Array(contextualResults.sorted(by: { $0.cost! < $1.cost! }).prefix(20))
+            // and then reload data
+            tableView.reloadData()
+            tableView.setContentOffset(.zero, animated: true)
+        } else {
+            // throw UIAlertViewController
+            let alert = UIAlertController(title: "not enough fuel to travel", message: "You need \(cost) and you only have \(FuelTank.shared.currentLevel)", preferredStyle: .alert)
+            // harsh!
+            alert.addAction(UIAlertAction(title: "Understood", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
+
+    @IBAction func unwindToLaureatesNearbyViewController(segue: UIStoryboardSegue) {
+        //nothing goes here
     }
 }
 
@@ -64,7 +85,6 @@ extension LaureatesNearbyViewController: UITableViewDelegate, UITableViewDataSou
         cell.categoryAndYearLabel.text = "\(winner.category) \(winner.year)"
         cell.cityLabel.text = "\(winner.city)"
         cell.costLabel.text = "\(winner.cost ?? 0)"
-
         return cell
     }
 
@@ -79,8 +99,8 @@ extension LaureatesNearbyViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 class LaureateSummaryCell: UITableViewCell {
-    @IBOutlet weak var firstLastLabel: UILabel!
-    @IBOutlet weak var categoryAndYearLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var costLabel: UILabel!
+    @IBOutlet var firstLastLabel: UILabel!
+    @IBOutlet var categoryAndYearLabel: UILabel!
+    @IBOutlet var cityLabel: UILabel!
+    @IBOutlet var costLabel: UILabel!
 }

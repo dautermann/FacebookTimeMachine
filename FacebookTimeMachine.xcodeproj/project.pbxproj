@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		25E3096523617C9300984C51 /* nobel-prize-laureates.json in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD9A423617000006B0C5B /* nobel-prize-laureates.json */; };
 		25E309712362D69000984C51 /* LaureateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E309702362D69000984C51 /* LaureateListingViewController.swift */; };
+		25E309732364043300984C51 /* NobelDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E309722364043300984C51 /* NobelDetailsViewController.swift */; };
 		25FAD98523616C0C006B0C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD98423616C0C006B0C5B /* AppDelegate.swift */; };
-		25FAD98723616C0C006B0C5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD98623616C0C006B0C5B /* ViewController.swift */; };
+		25FAD98723616C0C006B0C5B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAD98623616C0C006B0C5B /* HomeViewController.swift */; };
 		25FAD98A23616C0C006B0C5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD98823616C0C006B0C5B /* Main.storyboard */; };
 		25FAD98C23616C10006B0C5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD98B23616C10006B0C5B /* Assets.xcassets */; };
 		25FAD98F23616C10006B0C5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25FAD98D23616C10006B0C5B /* LaunchScreen.storyboard */; };
@@ -30,9 +31,11 @@
 
 /* Begin PBXFileReference section */
 		25E309702362D69000984C51 /* LaureateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaureateListingViewController.swift; sourceTree = "<group>"; };
+		25E309722364043300984C51 /* NobelDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobelDetailsViewController.swift; sourceTree = "<group>"; };
+		25E309742364129500984C51 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		25FAD98123616C0C006B0C5B /* FacebookTimeMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookTimeMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25FAD98423616C0C006B0C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		25FAD98623616C0C006B0C5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		25FAD98623616C0C006B0C5B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		25FAD98923616C0C006B0C5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		25FAD98B23616C10006B0C5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25FAD98E23616C10006B0C5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		25FAD97823616C0C006B0C5B = {
 			isa = PBXGroup;
 			children = (
+				25E309742364129500984C51 /* README.md */,
 				25FAD98323616C0C006B0C5B /* FacebookTimeMachine */,
 				25FAD99823616C11006B0C5B /* FacebookTimeMachineTests */,
 				25FAD98223616C0C006B0C5B /* Products */,
@@ -83,10 +87,11 @@
 		25FAD98323616C0C006B0C5B /* FacebookTimeMachine */ = {
 			isa = PBXGroup;
 			children = (
-				25FAD98423616C0C006B0C5B /* AppDelegate.swift */,
-				25FAD98623616C0C006B0C5B /* ViewController.swift */,
-				25E309702362D69000984C51 /* LaureateListingViewController.swift */,
 				25FAD9A5236170CA006B0C5B /* DataSource.swift */,
+				25FAD98423616C0C006B0C5B /* AppDelegate.swift */,
+				25E309702362D69000984C51 /* LaureateListingViewController.swift */,
+				25E309722364043300984C51 /* NobelDetailsViewController.swift */,
+				25FAD98623616C0C006B0C5B /* HomeViewController.swift */,
 				25FAD98823616C0C006B0C5B /* Main.storyboard */,
 				25FAD98B23616C10006B0C5B /* Assets.xcassets */,
 				25FAD98D23616C10006B0C5B /* LaunchScreen.storyboard */,
@@ -207,10 +212,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25FAD98723616C0C006B0C5B /* ViewController.swift in Sources */,
+				25FAD98723616C0C006B0C5B /* HomeViewController.swift in Sources */,
 				25FAD9A6236170CA006B0C5B /* DataSource.swift in Sources */,
 				25E309712362D69000984C51 /* LaureateListingViewController.swift in Sources */,
 				25FAD98523616C0C006B0C5B /* AppDelegate.swift in Sources */,
+				25E309732364043300984C51 /* NobelDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
