@@ -65,6 +65,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25E309752364227100984C51 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				25E309702362D69000984C51 /* LaureateListingViewController.swift */,
+				25E309722364043300984C51 /* NobelDetailsViewController.swift */,
+				25FAD98623616C0C006B0C5B /* HomeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		25E309762364227D00984C51 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				25FAD9A5236170CA006B0C5B /* DataSource.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
 		25FAD97823616C0C006B0C5B = {
 			isa = PBXGroup;
 			children = (
@@ -87,11 +105,9 @@
 		25FAD98323616C0C006B0C5B /* FacebookTimeMachine */ = {
 			isa = PBXGroup;
 			children = (
-				25FAD9A5236170CA006B0C5B /* DataSource.swift */,
+				25E309762364227D00984C51 /* Data Model */,
 				25FAD98423616C0C006B0C5B /* AppDelegate.swift */,
-				25E309702362D69000984C51 /* LaureateListingViewController.swift */,
-				25E309722364043300984C51 /* NobelDetailsViewController.swift */,
-				25FAD98623616C0C006B0C5B /* HomeViewController.swift */,
+				25E309752364227100984C51 /* ViewControllers */,
 				25FAD98823616C0C006B0C5B /* Main.storyboard */,
 				25FAD98B23616C10006B0C5B /* Assets.xcassets */,
 				25FAD98D23616C10006B0C5B /* LaunchScreen.storyboard */,

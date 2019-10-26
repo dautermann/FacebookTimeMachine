@@ -8,14 +8,17 @@ You can also type in a place name and it'll auto complete and populate the initi
 
 As you travel through time, watch your fuel level drop.
 
+## Time analysis
+I recompute the cost to get to all 400+ Nobel winners from the time machine's current position each time the time machine jumps (and the table view... errr... dashboard updates).  So the cost is N entries, or linear.
+
 ## Things I wish I could've done (but couldn't do because real life / job got in the way)
 
-display nobel prize details even better
+1. I do a lot of `willSet` and `didSet` in my production code when setting properties.  I didn't find an opportunity to do it in these initial vesions.
 
-color the cells (green, red, yellow/orange for "dangerous" travel) to indicate whether we have enough fuel to travel
+2. display nobel prize details even better
 
-implement a real fuel gage (like a progress bar?)
+3. color the cells (green, red, yellow/orange for "dangerous" travel) to indicate whether we have enough fuel to travel
 
-bring in MapKit for reals!
+4. implement a real fuel gage (like a progress bar?)
 
-
+5. bring in MapKit for reals!
