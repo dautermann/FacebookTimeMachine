@@ -18,11 +18,8 @@ I recompute the cost to get to all 400+ Nobel winners from the time machine's cu
 ## Things I wish I could've done (but couldn't do because real life / job got in the way)
 
 1. I try to do a lot more Swifty-ish things in my producion code (e.g. a lot of `willSet` and `didSet` actions when setting properties).  I didn't find an opportunity to do it in these initial vesions.
-
 2. display nobel prize details even better
-
 3. color the cells (green, red, yellow/orange for "dangerous" travel) to indicate whether we have enough fuel to travel
-
 4. implement a real fuel gage (like a progress bar?)
-
 5. bring in MapKit for reals!
+6. figure out and write some tests 😴

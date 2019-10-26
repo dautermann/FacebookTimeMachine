@@ -84,7 +84,7 @@ enum Gender: String, Codable {
 
 // MARK: - Location
 // CLLocationCoordinate2D isn't Codeable or Hashable... since Apple might eventually do this,
-// we'll create our own Codable type
+// we'll create our own Codable type -- https://www.objc.io/blog/2018/10/23/custom-types-for-codable/
 struct Location: Codable {
     let lat, lng: Double
 }
