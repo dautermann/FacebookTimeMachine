@@ -1,6 +1,8 @@
 # FacebookTimeMachine
 Use a time machine to meet Nobel laureates!
 
+Details of the [assignment can be seen by clicking here](Assignment.pdf).
+
 ## Getting started
 Type in coordinates (e.g. 37.3318, -122.0312) and you'll see a city name appear or update in the table. Click on the city name and start traveling!
 
